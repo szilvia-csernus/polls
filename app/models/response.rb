@@ -34,14 +34,15 @@ class Response < ApplicationRecord
         errors[:poll_owner] << 'should not respond.' if poll_own?
     end
 
-    def poll_author_same
-        Poll
-        .joins(questions: :responses)
-        .where(author_id: self.respondent_id)
+    def poll_author
+        self.question.poll
+        # Poll
+        # .joins(questions: :responses)
+        # .where(author_id: self.respondent_id)
     end
 
     def poll_own?
-        return true if poll_author_same.exists?
+        return true if poll_author.id == self.respondent_id?
         false
     end
 

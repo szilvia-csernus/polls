@@ -14,6 +14,6 @@ questions = Question.create([{ text: 'Will you attend the parent_evening 19th No
 answer_choices = AnswerChoice.create([{ text: 'Yes', question_id: 1}, { text: 'No', question_id: 1},
             { text: 'One', question_id: 2}, { text: 'Two', question_id: 2},
             { text: 'Yes', question_id: 3}, { text: 'No', question_id: 3}])
-responses = Response.create([{ responder_id: 3, answer_choice_id: 1}, { responder_id: 3, answer_choice_id: 4},
-            { responder_id: 3, answer_choice_id: 6}, { responder_id: 4, answer_choice_id: 2},
-            { responder_id: 4, answer_choice_id: 5}])
+responses = Response.create([{ respondent_id: 3, answer_choice_id: 1}, { respondent_id: 3, answer_choice_id: 4},
+            { respondent_id: 3, answer_choice_id: 6}, { respondent_id: 4, answer_choice_id: 2},
+            { respondent_id: 4, answer_choice_id: 5}])
