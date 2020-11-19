@@ -5,6 +5,8 @@ class Poll < ApplicationRecord
     class_name: :User,
     foreign_key: :author_id
 
-    has_many :questions
+    has_many :questions, dependent: :destroy
+
+    has_many :responses, through: :questions, source: :responses
 
 end

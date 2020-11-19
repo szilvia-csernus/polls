@@ -2,7 +2,7 @@ class Question < ApplicationRecord
     validates :text, :poll_id, presence: true
 
     belongs_to :poll
-    has_many :answer_choices
+    has_many :answer_choices, dependent: :destroy
     has_many :responses, through: :answer_choices, source: :responses
 
     def n_plus_one_results

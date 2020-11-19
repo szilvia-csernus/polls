@@ -1,7 +1,7 @@
 class Response < ApplicationRecord
     validates :respondent_id, :answer_choice_id, presence: true
     validate :not_duplicate_response
-    validate :not_own_poll
+    validate :does_not_respond_to_own_poll
 
     belongs_to :respondent,
     class_name: :User,
@@ -33,16 +33,19 @@ class Response < ApplicationRecord
     def not_own_poll
         errors[:poll_owner] << 'should not respond.' if poll_own?
     end
-
-    def poll_author
-        self.question.poll
-        # Poll
-        # .joins(questions: :responses)
-        # .where(author_id: self.respondent_id)
+    #BONUS
+    def does_not_respond_to_own_poll
+        record = Poll
+        .joins(questions: :responses)
+        .where(author_id: self.respondent_id)
+        return true if record.exists?
+        false
     end
 
-    def poll_own?
-        return true if poll_author.id == self.respondent_id?
+    #less efficient, implemented before BONUS
+    def poll_own? 
+        poll_author = self.question.poll.author
+        return true if poll_author.id == self.respondent_id
         false
     end
 
